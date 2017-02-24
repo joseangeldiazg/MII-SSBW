@@ -9,7 +9,7 @@ def ima():
     response = Response()
     response.headers['Content-Type']='image/jpg'
 
-    f= open('./resources/imagen.jpg', 'rb')
+    f= open('./static/ima/imagen.jpg', 'rb')
 
     ima=f.read()
     response.set_data(ima)
