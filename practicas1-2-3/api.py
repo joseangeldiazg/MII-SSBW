@@ -9,6 +9,7 @@ app = Flask(__name__)
 @app.route('/un_texto_plano')
 def text():
     response = Response()
+    response.headers['Content-Type'] = 'text/plain; charset=utf-8'
     response.set_data('Sirviendo texto plano')
     return response
 
@@ -21,17 +22,23 @@ def html():
     return response
 
 
-
 #Devuelve por en navegador una imagen
 @app.route('/archivo')
 def ima():
     response = Response()
     response.headers['Content-Type']='image/jpg'
-
     f= open('./static/ima/imagen.jpg', 'rb')
-
     ima=f.read()
     response.set_data(ima)
+    return response
+
+
+#Devuelve por el navegador una variable que le pase en la ruta
+@app.route('/sirviendo_variables/<variable>')
+def variable(variable):
+    response = Response()
+    response.headers['Content-Type'] = 'text/plain; charset=utf-8'
+    response.set_data(variable)
     return response
 
 
@@ -44,7 +51,6 @@ def hello_world():
     usuarios.append({'name':'pablo','dni':2356})
 
     return render_template('hola.html', usuarios=usuarios)
-
 
 
 if __name__ == '__main__':
