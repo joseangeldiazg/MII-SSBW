@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+  <ul>
+    {%for user in usuarios%}
+        <li>{{user.name}}, {{user.dni}}</li>
+    {%endfor%}
+  </ul>
+  </div> <!-- /container -->
+{% endblock %}

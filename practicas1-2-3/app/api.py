@@ -42,15 +42,20 @@ def variable(variable):
     return response
 
 
-@app.route('/')
-def hello_world():
+@app.route('/lista')
+def lista():
 
     usuarios = []
     usuarios.append({'name':'pepe','dni':2345})
     usuarios.append({'name':'jose','dni':2323})
     usuarios.append({'name':'pablo','dni':2356})
 
-    return render_template('hola.html', usuarios=usuarios)
+    return render_template('list.html', usuarios=usuarios)
+
+
+@app.route('/')
+def login():
+    return render_template('login.html')
 
 
 if __name__ == '__main__':
