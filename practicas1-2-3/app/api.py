@@ -8,18 +8,14 @@ app = Flask(__name__)
 #Devuelve por el navegador texto plano
 @app.route('/un_texto_plano')
 def text():
-    response = Response()
-    response.headers['Content-Type'] = 'text/plain; charset=utf-8'
-    response.set_data('Sirviendo texto plano')
-    return response
+    return render_template('basic-content.html',contenido="Sirviendo texto plano")
 
 
 #Devuelve en el navegador codigo html
 @app.route('/contenido_html')
 def html():
-    response = Response()
-    response.set_data('Sirviendo <b>html</b>')
-    return response
+    return render_template('basic-content.html',contenido='Sirviendo <b>html</b>')
+
 
 
 #Devuelve por en navegador una imagen
@@ -36,11 +32,7 @@ def ima():
 #Devuelve por el navegador una variable que le pase en la ruta
 @app.route('/sirviendo_variables/<variable>')
 def variable(variable):
-    response = Response()
-    response.headers['Content-Type'] = 'text/plain; charset=utf-8'
-    response.set_data(variable)
-    return response
-
+    return render_template('basic-content.html',contenido=variable)
 
 
 #Devuelve una lista de items
