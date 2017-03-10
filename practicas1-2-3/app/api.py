@@ -27,7 +27,7 @@ def html():
 def ima():
     response = Response()
     response.headers['Content-Type']='image/jpg'
-    f= open('./static/ima/imagen.jpg', 'rb')
+    f= open('app/static/images/imagen.jpg', 'rb')
     ima=f.read()
     response.set_data(ima)
     return response
@@ -42,6 +42,8 @@ def variable(variable):
     return response
 
 
+
+#Devuelve una lista de items
 @app.route('/lista')
 def lista():
 
@@ -51,6 +53,13 @@ def lista():
     usuarios.append({'name':'pablo','dni':2356})
 
     return render_template('list.html', usuarios=usuarios)
+
+
+#Página de error
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 
 
 @app.route('/')
