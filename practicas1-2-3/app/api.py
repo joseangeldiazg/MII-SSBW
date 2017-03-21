@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask
-from flask import render_template, Response
+from flask import Flask, escape, redirect, render_template, request, session, url_for, Response
 
 app = Flask(__name__)
 
@@ -8,14 +7,16 @@ app = Flask(__name__)
 #Devuelve por el navegador texto plano
 @app.route('/un_texto_plano')
 def text():
-    return render_template('basic-content.html',contenido="Sirviendo texto plano")
-
+    if 'usermail' in session:
+        return render_template('basic-content.html',contenido="Sirviendo texto plano")
+    return render_template('login')
 
 #Devuelve en el navegador codigo html
 @app.route('/contenido_html')
 def html():
-    return render_template('basic-content.html',contenido='Sirviendo <b>html</b>')
-
+    if 'usermail' in session:
+        return render_template('basic-content.html',contenido='Sirviendo <b>html</b>')
+    return render_template('login')
 
 
 #Devuelve por en navegador una imagen
@@ -32,8 +33,9 @@ def ima():
 #Devuelve por el navegador una variable que le pase en la ruta
 @app.route('/sirviendo_variables/<variable>')
 def variable(variable):
-    return render_template('basic-content.html',contenido=variable)
-
+    if 'usermail' in session:
+        return render_template('basic-content.html',contenido=variable)
+    return redirect(url_for('login'))
 
 #Devuelve una lista de items
 @app.route('/lista')
@@ -53,12 +55,24 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
-
+#Inicio
 @app.route('/')
+def hello():
+    if 'usermail' in session:
+        usermail = session['usermail']
+        return render_template('hello.html', usuario=usermail)
+    return redirect(url_for('login'))
+
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+  if request.method == 'POST':
+    session['usermail'] = request.form['usermail']
+    return redirect(url_for('hello'))
+  return render_template('login.html')
 
 
 if __name__ == '__main__':
-
+    app.secret_key = 'super secret key'
+    app.config['SESSION_TYPE'] = 'filesystem'
     app.run(host='0.0.0.0', debug='true')
