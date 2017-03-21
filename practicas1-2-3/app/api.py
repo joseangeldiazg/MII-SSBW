@@ -22,13 +22,14 @@ def html():
 #Devuelve por en navegador una imagen
 @app.route('/archivo')
 def ima():
-    response = Response()
-    response.headers['Content-Type']='image/jpg'
-    f= open('app/static/images/imagen.jpg', 'rb')
-    ima=f.read()
-    response.set_data(ima)
-    return response
-
+    if 'usermail' in session:
+        response = Response()
+        response.headers['Content-Type']='image/jpg'
+        f= open('app/static/images/imagen.jpg', 'rb')
+        ima=f.read()
+        response.set_data(ima)
+        return response
+    return render_template('login')
 
 #Devuelve por el navegador una variable que le pase en la ruta
 @app.route('/sirviendo_variables/<variable>')
@@ -40,13 +41,13 @@ def variable(variable):
 #Devuelve una lista de items
 @app.route('/lista')
 def lista():
-
-    usuarios = []
-    usuarios.append({'name':'pepe','dni':2345})
-    usuarios.append({'name':'jose','dni':2323})
-    usuarios.append({'name':'pablo','dni':2356})
-
-    return render_template('list.html', usuarios=usuarios)
+    if 'usermail' in session:
+        usuarios = []
+        usuarios.append({'name':'pepe','dni':2345})
+        usuarios.append({'name':'jose','dni':2323})
+        usuarios.append({'name':'pablo','dni':2356})
+        return render_template('list.html', usuarios=usuarios)
+    return redirect(url_for('login'))
 
 
 #Página de error
@@ -64,6 +65,7 @@ def hello():
     return redirect(url_for('login'))
 
 
+#login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
   if request.method == 'POST':
@@ -71,6 +73,14 @@ def login():
     return redirect(url_for('hello'))
   return render_template('login.html')
 
+ #logout
+
+@app.route('/logout')
+def logout():
+    if 'usermail' in session:
+        session.pop('usermail', None)
+        return render_template('login.html')
+    return render_template('login.html')
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
