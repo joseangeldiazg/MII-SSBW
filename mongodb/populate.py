@@ -60,18 +60,20 @@ def parseDireccion(json):
         final['longitude'] = data.get("geometry", {}).get("location", {}).get("lng", None)
     return final
 
-
-dir = addr(street="Hermosa, 5 ", city="Granada", zipcode=18010, coord=[37.1766872, -3.5965171])  # así están bien
-r = restaurants(name="Casa Julio", cuisine="Granaina", borough="Centro", address=dir)
-r.save()
-
+obtenerRestaurantes("Casa Julio", "Granada", "Granaina", "Centro")
 obtenerRestaurantes("El Nido del Búho", "Granada", "Tapas", "Plaza de Toros")
 obtenerRestaurantes("Pizzametro", "Granada", "Italiana", "Centro")
 obtenerRestaurantes("La Bodeguica de Miguel del Rei", "Almería", "Tapas", "San Luís")
 
-# Consulta, los tres primeros
-for r in restaurants.objects[:2]:
-    print (r.name, r.address.coord)
 
-# Hacer más consultas, probar las de geolocalización
-# ...
+# Consulta, los tres primeros
+for r in restaurants.objects[:3]:
+    print (r.name, r.cuisine, r.address.street, r.address.coord)
+
+#Consultar por tipo de cocina tapas
+for r in restaurants.objects(cuisine="Tapas"):
+    print (r.name)
+
+#Consultar por tipo de cocina no tapas
+for r in restaurants.objects(cuisine__ne="Tapas"):
+    print (r.name)
