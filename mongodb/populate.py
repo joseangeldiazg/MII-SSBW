@@ -66,6 +66,20 @@ obtenerRestaurantes("Pizzametro", "Granada", "Italiana", "Centro")
 obtenerRestaurantes("La Bodeguica de Miguel del Rei", "Almería", "Tapas", "San Luís")
 
 
+    #ne – not equal to
+    #lt – less than
+    #lte – less than or equal to
+    #gt – greater than
+    #gte – greater than or equal to
+    #not – negate a standard check, may be used before other operators (e.g. Q(age__not__mod=5))
+    #in – value is in list (a list of values should be provided)
+    #nin – value is not in list (a list of values should be provided)
+    #mod – value % x == y, where x and y are two provided values
+    #all – every item in list of values provided is in array
+    #size – the size of the array is
+    #exists – value for field exists
+
+
 # Consulta, los tres primeros
 for r in restaurants.objects[:3]:
     print (r.name, r.cuisine, r.address.street, r.address.coord)
@@ -76,4 +90,9 @@ for r in restaurants.objects(cuisine="Tapas"):
 
 #Consultar por tipo de cocina no tapas
 for r in restaurants.objects(cuisine__ne="Tapas"):
+    print (r.name)
+
+#Consultar por geolocalizacion.
+
+for r in restaurants.objects(address__coord__within_distance=[(37.18, -3.60), 1]):
     print (r.name)
