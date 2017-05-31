@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block heading %}
+  <h2>Restaurantes</h2>
+{% endblock %}
+
+{% block content %}
+  <ul class="list-unstyled">
+  {% for r in restaurantes %}
+    <li class="well well-sm">{{ r.name }}, {{ r.cuisine }}</li>
+  {% empty %}
+    <li>No hay restaurantes. :(</li>
+  {% endfor %}
+  </ul>
+{% endblock %}
