@@ -6,7 +6,6 @@ db=connect('test')
 
 #Borramos la base de datos para que no se pisen los documentos
 
-db.drop_database('test')
 
 # Esquema para la BD de pruebas de mongoDB
 

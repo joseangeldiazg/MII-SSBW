@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-
+from .models import restaurants
 # Create your views here.
 
 def index(request):
@@ -11,6 +11,6 @@ def test(request):
 
 def listar(request):
     context = {
-            "resta": restaurants.objectcs[:5], # los cinco primeros
+            "resta": restaurants.objectcs.all, # los cinco primeros
          }
     return render (requests, 'restaurantes/listar.html', context)

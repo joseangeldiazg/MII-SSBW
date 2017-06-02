@@ -3,10 +3,9 @@ from django.db import models
 # Create your models here.
 
 from mongoengine import *
-from requests import *
 import datetime
 
-db=connect('test')
+connect('test')
 
 # Esquema para la BD de pruebas de mongoDB
 
