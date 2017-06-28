@@ -8,7 +8,7 @@
   <ul class="list-unstyled">
     <li class="well well-sm">Nombre, Zona, Cocina</li>
   {% for r in resta %}
-    <li class="well well-sm">{{ r.name }}, {{ r.borough }}, {{ r.cuisine }}</li>
+    <a href="{% url 'restaurant' r.restaurant_id %}" class="well well-sm">{{ r.name }}, {{ r.borough }}, {{ r.cuisine }}</a>
   {% empty %}
     <li>No hay restaurantes. :(</li>
   {% endfor %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from .models import restaurants
+
 # Create your views here.
 
 def index(request):
@@ -20,8 +21,8 @@ def introducir(request):
 def restaurant(request, id):
     restaurante = restaurants.objects(restaurant_id=id)[0]
     context = {
-            "resta":restaurante,
-            "imagen": str(id)
+            "resta": restaurante,
+            "imagen": str(restaurante.restaurant_id)
     }
     return render (request, 'restaurantes/restaurant.html', context)
 
