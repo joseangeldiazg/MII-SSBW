@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from .models import restaurants
+from .forms import AddRestaurant
 
 # Create your views here.
 
@@ -32,7 +33,7 @@ def add(request):
             r = form.save()
             return redirect('listar')
     else:
-        form = RestaurantForm();
+        form = AddRestaurant();
     # GET o error
     context = {
         'form': form,
