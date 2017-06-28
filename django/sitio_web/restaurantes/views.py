@@ -17,6 +17,14 @@ def listar(request):
 def introducir(request):
     return render (request, 'restaurantes/introducir.html')
 
+def restaurant(request, id):
+    restaurante = restaurants.objects(restaurant_id=id)[0]
+    context = {
+            "resta":restaurante,
+            "imagen": str(id)
+    }
+    return render (request, 'restaurantes/restaurant.html', context)
+
 def buscar(request):
     parametro=request.GET.get('zona')
     context={

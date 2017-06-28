@@ -8,4 +8,5 @@ urlpatterns = [
   url(r'^listar/introducir/$', views.introducir, name='introducir'),
   url(r'^buscar/introducir/$', views.introducir, name='introducir'),
   url(r'^buscar/$', views.buscar, name='buscar'),
+    url(r'^restaurant/(?P<id>[0-9]+)$', views.restaurant, name='restaurant'),
 ]
