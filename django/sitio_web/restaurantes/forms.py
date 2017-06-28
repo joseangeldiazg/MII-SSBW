@@ -1,6 +1,24 @@
 from django import forms
-
+from mongoengine import *
+from requests import *
+import datetime
 from .models import *
+
+def parseDireccion(json):
+    final = {}
+    if json['results']:
+        data = json['results'][0]
+        for item in data['address_components']:
+            for category in item['types']:
+                data[category] = {}
+                data[category] = item['long_name']
+        final['number'] = data.get("street_number", None)
+        final['street'] = data.get("route", None)
+        final['city'] = data.get("locality", None)
+        final['postal_code'] = data.get("postal_code", None)
+        final['latitude'] = data.get("geometry", {}).get("location", {}).get("lat", None)
+        final['longitude'] = data.get("geometry", {}).get("location", {}).get("lng", None)
+    return final
 
 class AddRestaurant(forms.Form):
 
@@ -32,21 +50,5 @@ class AddRestaurant(forms.Form):
 
         if commit:
             r.save()
-            
-        return r
 
-    def parseDireccion(json):
-        final = {}
-        if json['results']:
-            data = json['results'][0]
-            for item in data['address_components']:
-                for category in item['types']:
-                    data[category] = {}
-                    data[category] = item['long_name']
-            final['number'] = data.get("street_number", None)
-            final['street'] = data.get("route", None)
-            final['city'] = data.get("locality", None)
-            final['postal_code'] = data.get("postal_code", None)
-            final['latitude'] = data.get("geometry", {}).get("location", {}).get("lat", None)
-            final['longitude'] = data.get("geometry", {}).get("location", {}).get("lng", None)
-        return final
+        return r
