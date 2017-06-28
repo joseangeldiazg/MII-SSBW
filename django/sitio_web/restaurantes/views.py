@@ -3,6 +3,11 @@ from .models import restaurants
 
 # Create your views here.
 
+def handle_uploaded_file(n, f):
+    with open('static/img/restaurants/' + str(n) + '.jpg', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
 def index(request):
     context = {
             "resta": restaurants.objects[:5], # los cinco primeros
@@ -17,6 +22,22 @@ def listar(request):
 
 def introducir(request):
     return render (request, 'restaurantes/introducir.html')
+
+def add(request):
+    if request.method == "POST":
+        form = AddRestaurant(request.POST, request.FILES)
+        if form.is_valid():
+            if len(request.FILES) != 0:
+                handle_uploaded_file(restaurants.objects.count() + 1, request.FILES['image'])
+            r = form.save()
+            return redirect('listar')
+    else:
+        form = RestaurantForm();
+    # GET o error
+    context = {
+        'form': form,
+    }
+    return render(request, 'restaurantes/addrestaurant.html', context)
 
 def restaurant(request, id):
     restaurante = restaurants.objects(restaurant_id=id)[0]
