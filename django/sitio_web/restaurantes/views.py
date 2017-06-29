@@ -2,6 +2,9 @@ from django.shortcuts import render, HttpResponse, redirect
 from .models import restaurants
 from django.contrib.auth.decorators import login_required
 from .forms import AddRestaurant
+import logging
+import datetime
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -14,15 +17,18 @@ def index(request):
     context = {
             "resta": restaurants.objects, # los cinco primeros
          }
+    logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha accedido al inicio. ")
     return render (request, 'restaurantes/listar.html', context)
 
 def listar(request):
+    logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha accedido a listar. ")
     context = {
             "resta": restaurants.objects, # los cinco primeros
          }
     return render (request, 'restaurantes/listar.html', context)
 
 def introducir(request):
+    logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha accedido a buscar por zona. ")
     return render (request, 'restaurantes/introducir.html')
 
 @login_required
@@ -40,6 +46,7 @@ def add(request):
     context = {
         'form': form,
     }
+    logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha añadido un nuevo restaurante. ")
     return render(request, 'restaurantes/addrestaurant.html', context)
 
 def restaurant(request, id):
@@ -48,6 +55,7 @@ def restaurant(request, id):
             "resta": restaurante,
             "imagen": str(restaurante.restaurant_id)
     }
+    logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha accedido a la ficha de un restaurante. ")
     return render (request, 'restaurantes/restaurant.html', context)
 
 def buscar(request):
@@ -55,4 +63,5 @@ def buscar(request):
     context={
         "resta":restaurants.objects(borough=parametro)
     }
+    logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha buscado en la zona " + zona)
     return render (request, 'restaurantes/listar.html', context)
