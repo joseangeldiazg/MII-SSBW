@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'restaurantes',
     'bootstrap4',
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +118,16 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# OPTIONS FOR AUTENTICATION
+
+REGISTRATION_OPEN = True        # If True, users can register
+ACCOUNT_ACTIVATION_DAYS = 7     # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
+LOGIN_REDIRECT_URL = '/restaurantes/'  # The page you want users to arrive at after they successful log in
+LOGIN_URL = '/accounts/login/'
+
 
 
 # Static files (CSS, JavaScript, Images)
