@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>App Restaurantes</title>
+        <title>{% block title %} {% endblock %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -51,10 +51,6 @@
       </div>
     </nav>
 
-    <div>
-
-    </div>
-      {% block heading %}{% endblock %}
     <div>
     <div>
        {% block content %}{% endblock %}

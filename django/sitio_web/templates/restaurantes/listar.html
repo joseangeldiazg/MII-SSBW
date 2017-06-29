@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
-{% block heading %}
-  <h2>Restaurantes</h2>
-{% endblock %}
+{% block title %} Listado de Restaurantes {% endblock %}
 
 {% block content %}
+  <h2>Restaurantes Almacenados</h2>
   <ul class="list-unstyled">
     <li class="well well-sm">Nombre, Zona, Cocina</li>
   {% for r in resta %}

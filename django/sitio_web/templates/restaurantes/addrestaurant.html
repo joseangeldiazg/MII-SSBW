@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
+
+
 {% load bootstrap4 %}
-{% block heading %}
-  <h2>Añadir Restaurantes</h2>
-{% endblock %}
+
+{% block title %} Añadir Restaurantes {% endblock %}
 
 {% block content %}
+  <h2>Añadir Restaurantes</h2>
   <form enctype="multipart/form-data" action="{% url 'addrestaurant' %}" method="post" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}
