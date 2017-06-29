@@ -15,8 +15,12 @@
     <hr>
     <p> {{ resta.cuisine }}</p>
     <hr>
+    {% if resta.image %}
     <img id="restaurant-image" src="/static/img/restaurants/{{resta.restaurant_id}}.jpg"/>
+    {% else %}
+    <img id="restaurant-image" src="{% static 'img/standar.jpg' %}">
+    {% endif %}
   </div>
-  <div class=".col-md-4"></div>
+  <div class="col-md-4"></div>
 </div>
 {% endblock %}
