@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import restaurants
+from django.contrib.auth.decorators import login_required
 from .forms import AddRestaurant
 
 # Create your views here.
@@ -24,6 +25,7 @@ def listar(request):
 def introducir(request):
     return render (request, 'restaurantes/introducir.html')
 
+@login_required
 def add(request):
     if request.method == "POST":
         form = AddRestaurant(request.POST, request.FILES)
