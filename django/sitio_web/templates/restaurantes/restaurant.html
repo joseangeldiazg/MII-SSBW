@@ -7,13 +7,14 @@
 {% block content %}
 
 <div class="row">
-  <div class="col-sm-12 col-md-6">
+  <div class="col-md-4"></div>
+  <div id="restaurant" class="col-md-4">
     <h2>{{ resta.name }}</h2>
     <hr>
     <p> {{ resta.cuisine }}</p>
-    <p> {{ resta.restaurant_id }}</p>
     <hr>
-    <img src="/static/img/restaurants/{{resta.restaurant_id}}.jpg"/>
+    <img id="restaurant-image" src="/static/img/restaurants/{{resta.restaurant_id}}.jpg"/>
   </div>
+  <div class=".col-md-4"></div>
 </div>
 {% endblock %}

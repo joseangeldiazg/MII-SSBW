@@ -124,7 +124,7 @@ USE_TZ = True
 
 LOG_FILE = 'logs.log'
 
-      LOGGING = {
+LOGGING = {
           'version': 1,
 
           'disable_existing_loggers': False,
