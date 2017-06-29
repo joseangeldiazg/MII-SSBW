@@ -22,6 +22,18 @@
   padding: 10px;
 }
 
+/*LISTA DE RESTAURANTES*/
+
+#restaurant-list
+{
+  padding: 30px;
+}
+
+#restaurant-item
+{
+  padding: 5px;
+  margin-top: 100px;
+}
 
 /*FORMULARIOS Y RECURSOS CENTRADOS*/
 

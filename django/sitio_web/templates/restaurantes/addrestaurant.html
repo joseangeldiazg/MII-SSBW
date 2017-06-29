@@ -7,7 +7,9 @@
 {% block title %} Añadir Restaurantes {% endblock %}
 
 {% block content %}
-  <h2>Añadir Restaurantes</h2>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+  <h2 style="text-align:center;">Añadir Restaurantes</h2>
   <form enctype="multipart/form-data" action="{% url 'addrestaurant' %}" method="post" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}
@@ -17,4 +19,6 @@
         </button>
     {% endbuttons %}
   </form>
+</div>
+<div class="col-md-4"></div>
 {% endblock %}

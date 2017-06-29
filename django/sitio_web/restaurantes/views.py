@@ -11,13 +11,13 @@ def handle_uploaded_file(n, f):
 
 def index(request):
     context = {
-            "resta": restaurants.objects[:5], # los cinco primeros
+            "resta": restaurants.objects, # los cinco primeros
          }
     return render (request, 'restaurantes/listar.html', context)
 
 def listar(request):
     context = {
-            "resta": restaurants.objects[:2], # los cinco primeros
+            "resta": restaurants.objects, # los cinco primeros
          }
     return render (request, 'restaurantes/listar.html', context)
 
