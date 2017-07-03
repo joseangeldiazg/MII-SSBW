@@ -17,17 +17,10 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework_mongoengine import routers
 
-from . import views
-from . import serializers
 
-router = routers.DefaultRouter()
-
-   # register REST API endpoints with DRF router
-router.register(r'restaurants', serializers.restaurantsViewSet, r"restaurants")
 
 urlpatterns = [
     url(r'^restaurantes/', include('restaurantes.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^api/', include(router.urls, namespace='api')),
 ]
