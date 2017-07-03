@@ -33,9 +33,17 @@
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
           </button>
-          <a class="navbar-brand" href="/restaurantes">Inicio</a>
-          <a class="navbar-brand" href="/restaurantes/buscar/introducir/">Buscar</a>
-          <a class="navbar-brand" href="/restaurantes/addrestaurant/">Añadir Restaurante</a>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item" id="menu-inicio">
+              <a class="navbar-brand" href="/restaurantes">Inicio</a>
+            </li>
+            <li class="nav-item" id="menu-buscar">
+              <a class="navbar-brand" href="/restaurantes/buscar/introducir/">Buscar</a>
+            </li>
+            <li class="nav-item" id="menu-add">
+              <a class="navbar-brand" href="/restaurantes/addrestaurant/">Añadir Restaurante</a>
+            </li>
+          </ul>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             {% if user.is_authenticated %}
@@ -67,13 +75,15 @@
       <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
       <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
       <script>
-              $(function() {
-                  $('.navbar-header').on('click','.navbar-brand', function ( e ) {
-                    e.preventDefault();
-                    $(this).parents('.navbar-header').find('.active').removeClass('active').end().end().addClass('active');
-                    $(activeTab).show();
-                  });
-                });
+        $(document).ready(function() {
+
+            $("#menu-inicio").click(function(){
+              $("#menu-add").removeClass('active-item');
+              $("#menu-buscar").removeClass('active-item');
+              $("#menu-inicio").addClass('active-item');
+            })
+          });
       </script>
+
     </body>
   </html>
