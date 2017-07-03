@@ -63,5 +63,5 @@ def buscar(request):
     context={
         "resta":restaurants.objects(borough=parametro)
     }
-    logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha buscado en la zona " + zona)
+    logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha buscado en la zona ")
     return render (request, 'restaurantes/listar.html', context)
