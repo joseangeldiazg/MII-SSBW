@@ -1,5 +1,8 @@
 from rest_framework_mongoengine import serializers
 from rest_framework_mongoengine import viewsets
+from rest_framework import filters
+
+from requests import *
 
 from .models import restaurants
 
@@ -11,7 +14,13 @@ class restaurantsSerializer(serializers.DocumentSerializer):
 
 
 class restaurantsViewSet(viewsets.ModelViewSet):
-    lookup_field = 'name'
     serializer_class = restaurantsSerializer
+    queryset= restaurants.objects.all()
+
     def get_queryset(self):
-        return restaurants.objects.all()
+        queryset= restaurants.objects.all()
+        cuisine = self.request.query_params.get('cuisine', None)
+        if cuisine is not None:
+            queryset = queryset.filter(cuisine=cuisine)
+
+        return queryset
