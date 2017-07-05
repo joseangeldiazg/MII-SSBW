@@ -36,13 +36,13 @@
             </button>
             <ul class="navbar-nav mr-auto">
               <li >
-                <a class="navbar-brand" id="menu-inicio" href="/restaurantes">Inicio</a>
+                <a class="navbar-brand" id="menu-inicio" href="{% url 'listar' %}">Inicio</a>
               </li>
               <li >
-                <a class="navbar-brand" id="menu-buscar" href="/restaurantes/buscar/introducir/">Buscar</a>
+                <a class="navbar-brand" id="menu-search" href="{% url 'introducir' %}">Buscar</a>
               </li>
               <li >
-                <a class="navbar-brand" id="menu-add" href="/restaurantes/addrestaurant/">Añadir Restaurante</a>
+                <a class="navbar-brand" id="menu-add" href="{% url 'addrestaurant' %}">Añadir Restaurante</a>
               </li>
             </ul>
           </div>
@@ -82,10 +82,12 @@
           menu = '{{ menu }}'
           if (menu === "menu-inicio") {
               $("#menu-inicio").addClass("activar");
-          } else if (menu === "nav-add") {
+          } else if (menu === "menu-add") {
               $("#menu-add").addClass("activar");
-          } else if (menu=="menu-buscar"){
-              $("#nav-buscar").addClass("activar")
+          } else if (menu === "menu-buscar"){
+              $("#menu-search").addClass("activar");
+          } else if (menu === "menu-resultados"){
+              $("#menu-search").addClass("activar");
           }
       });
       </script>

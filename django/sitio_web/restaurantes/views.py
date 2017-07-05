@@ -15,7 +15,8 @@ def handle_uploaded_file(n, f):
 
 def index(request):
     context = {
-            "resta": restaurants.objects, # los cinco primeros
+            "resta": restaurants.objects,
+            "menu": "menu-inicio"
          }
     logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha accedido al inicio. ")
     return render (request, 'restaurantes/listar.html', context)
@@ -23,13 +24,17 @@ def index(request):
 def listar(request):
     logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha accedido a listar. ")
     context = {
-            "resta": restaurants.objects, # los cinco primeros
+            "resta": restaurants.objects,
+            "menu": "menu-inicio"
          }
     return render (request, 'restaurantes/listar.html', context)
 
 def introducir(request):
-    logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha accedido a buscar por zona. ")
-    return render (request, 'restaurantes/introducir.html')
+    logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha accedido a introducir busqueda por zona. ")
+    context = {
+            "menu": "menu-buscar"
+         }
+    return render (request, 'restaurantes/introducir.html', context)
 
 @login_required
 def add(request):
@@ -44,7 +49,8 @@ def add(request):
         form = AddRestaurant();
     # GET o error
     context = {
-        'form': form,
+        "form": form,
+        "menu": "menu-add"
     }
     logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha añadido un nuevo restaurante. ")
     return render(request, 'restaurantes/addrestaurant.html', context)
@@ -61,7 +67,8 @@ def restaurant(request, id):
 def buscar(request):
     parametro=request.GET.get('zona')
     context={
-        "resta":restaurants.objects(borough=parametro)
+        "resta":restaurants.objects(borough=parametro),
+        "menu":"menu-resultados"
     }
     logger.info(datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S') + " - se ha buscado en la zona ")
     return render (request, 'restaurantes/listar.html', context)
