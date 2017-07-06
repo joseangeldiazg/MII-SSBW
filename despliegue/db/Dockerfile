@@ -1,8 +1,8 @@
 FROM mvertes/alpine-mongo:latest
 # Reference https://docs.docker.com/engine/reference/builder/#label
-LABEL maintainer "joseangeldiazg <joseadiazg02@correo.ugr.es>"
+LABEL maintainer "fblupi <fblupi@correo.ugr.es>"
 
-RUN apk update && apk upgrade
+RUN apk update && apk upgrade && apk add mongodb-tools
 
 COPY mongodb /etc/conf.d/
 

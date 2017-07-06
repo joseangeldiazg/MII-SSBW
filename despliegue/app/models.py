@@ -1,21 +1,17 @@
 from django.db import models
 
-# Create your models here.
-
 from mongoengine import *
+
 import datetime
 
-connect('test', host='bd', port=27017)
-
-# Esquema para la BD de pruebas de mongoDB
+connect('test', host='restaurapp_db', port=27017)
 
 class addr(EmbeddedDocument):
     building = StringField()
     street   = StringField()
-    city     = StringField()   # añadido
+    city     = StringField()
     zipcode  = IntField()
-    coord    = GeoPointField() # OJO, al BD de test estan a revés
-                               # [long, lat] en vez de [lat, long]
+    coord    = GeoPointField()
 
 class likes(EmbeddedDocument):
     grade = StringField(max_length=1)
@@ -24,9 +20,9 @@ class likes(EmbeddedDocument):
 
 class restaurants(Document):
     name             = StringField(required=True, max_length=80)
-    restaurant_id    = IntField(min_value=8, unique=True)
+    restaurant_id    = IntField(min_value=1, unique=True)
     cuisine          = StringField()
     borough          = StringField()
-    address          = EmbeddedDocumentField(addr)              # en la misma collección
+    address          = EmbeddedDocumentField(addr)
     grades           = ListField(EmbeddedDocumentField(likes))
-    image           = FileField()
+    image            = ImageField()
