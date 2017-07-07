@@ -47,3 +47,24 @@ El diseño, es básico ya que dependiendo del uso que se le quiera dar los datos
 ![Single Page App](./images/filter.png)
 
 
+## Despliegue
+
+Para el despliegue se ha seguido una similitud con una arquitectura microservicios en la que se han divido el servidor web, la app y la base de datos en tres contenedores docker distintos. Para comprobar el despliegue de la misma:
+
+	git clone https://github.com/joseangeldiazg/MII-SSBW.git
+	cd MII-SSBW 
+	cd despliegue
+	docker-compose up
+	
+
+## Dependencias
+
+- Django 1.11.1
+- pymongo 2.8
+- mongoengine 0.13.0
+- Pillow 4.1.1
+- django-cors-headers
+- Requests 2.18.1
+- django-registration-redux 1.6
+- djangorestframework 3.6.3
+- django-rest-framework-mongoengine 3.3.1
