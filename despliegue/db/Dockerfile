@@ -1,6 +1,6 @@
 FROM mvertes/alpine-mongo:latest
 # Reference https://docs.docker.com/engine/reference/builder/#label
-LABEL maintainer "fblupi <fblupi@correo.ugr.es>"
+LABEL maintainer "joseangeldiazg"
 
 RUN apk update && apk upgrade && apk add mongodb-tools
 

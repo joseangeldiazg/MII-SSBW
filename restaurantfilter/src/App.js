@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.ico';
 import './App.css';
+import "bootstrap/dist/css/bootstrap.css";
 
 const TIPOS = [
   { cuisine: "Tapas"},
@@ -25,6 +26,7 @@ class RestaurantDisplay extends Component {
     const restaurantesData = this.state.restaurantesData;
     if (!restaurantesData) return <div>Loading</div>;
     return <div>{JSON.stringify(restaurantesData)}</div>;
+
   }
 }
 

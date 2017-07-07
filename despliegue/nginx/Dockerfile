@@ -1,6 +1,6 @@
 FROM nginx:alpine
 # Reference https://docs.docker.com/engine/reference/builder/#label
-LABEL maintainer "fblupi <fblupi@correo.ugr.es>"
+LABEL maintainer "joseangeldiazg"
 
 COPY uwsgi.conf /etc/nginx/conf.d/
 
